@@ -10,7 +10,13 @@ exports.TransactionModule = void 0;
 const common_1 = require("@nestjs/common");
 const transaction_service_1 = require("./transaction.service");
 const transaction_controller_1 = require("./transaction.controller");
+const auth_middleware_1 = require("../middlewares/auth.middleware");
 let TransactionModule = class TransactionModule {
+    configure(consumer) {
+        consumer
+            .apply(auth_middleware_1.AuthMiddleware)
+            .forRoutes({ path: 'transaction', method: common_1.RequestMethod.POST });
+    }
 };
 TransactionModule = __decorate([
     (0, common_1.Module)({

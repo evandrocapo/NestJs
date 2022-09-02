@@ -10,8 +10,10 @@ export class TransactionController {
   @Post()
   create(@Body() createTransactionDto: CreateTransactionDto) {
     if(this.isValidRequest(createTransactionDto)){
-      return this.transactionService.create(createTransactionDto);
+      this.transactionService.create(createTransactionDto);
+      return createTransactionDto
     }
+
     throw new BadRequestException
   }
 
